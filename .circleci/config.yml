@@ -1,19 +1,17 @@
-version: 2.1
-
+version: '2.1'
 orbs:
-  node: circleci/node@4.7.0
-
+  node: circleci/node@21.1
 jobs:
-  build:
+  test:
     executor:
       name: node/default
-      tag: '10.4'
+      tag: '13.14'
     steps:
       - checkout
-      - run: npm install
-      - run: npm run test
-
+      - node/install-packages
+      - run:
+          command: npm run test
 workflows:
-  say-hello-workflow:
+  test_my_app:
     jobs:
-      - build
+      - test
